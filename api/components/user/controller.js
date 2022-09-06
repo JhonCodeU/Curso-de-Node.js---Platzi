@@ -1,4 +1,5 @@
 import { list, get, upsert, remove } from '../../../store/dummy.js';
+import { nanoid } from 'nanoid';
 const TABLE = 'user';
 
 export default function (injectedStore) {
@@ -16,7 +17,11 @@ export default function (injectedStore) {
     }
 
     function createUser (data) {
-        return upsert(TABLE, data);
+        const user = {
+            id: data.id || nanoid(),
+            name: data.name,
+        };
+        return upsert(TABLE, user);
     }
     
     function deleteUser (id) {
