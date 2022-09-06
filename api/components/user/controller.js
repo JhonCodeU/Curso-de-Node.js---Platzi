@@ -16,7 +16,6 @@ export default function (injectedStore) {
     }
 
     function createUser (data) {
-        console.log(data);
         return upsert(TABLE, data);
     }
     

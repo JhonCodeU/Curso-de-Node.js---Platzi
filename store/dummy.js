@@ -13,12 +13,13 @@ async function get (id, table) {
     return collection.filter(item => item.id === id)[0] || null;
 }
 
-async function upsert (table, data) {
+async function upsert (collection, data) {
     db[collection].push(data);
     return true;
 }
 
-async function remove (id) {
+async function remove (id, collection) {
+    db[collection] = db[collection].filter(item => item.id !== id);
     return true;
 }
 

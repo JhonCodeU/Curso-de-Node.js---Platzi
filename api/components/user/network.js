@@ -28,14 +28,6 @@ router.post('/', (req, res) => {
     });
 });
 
-router.put('/', (req, res) => {
-    controller.updateUser(req.body).then((user) => {
-        success(req, res, user, 200);
-    }).catch((err) => {
-        error(req, res, err, 500);
-    });
-});
-
 router.delete('/:id', (req, res) => {
     controller.deleteUser(req.params.id).then((user) => {
         success(req, res, user, 200);
