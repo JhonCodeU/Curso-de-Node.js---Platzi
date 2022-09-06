@@ -5,20 +5,20 @@ const db = {
     ]
 };
 
-function list (table) {
-    return db[table]
+async function list (table) {
+    return await db[table]
 }
-function get (id, table) {
-    let collection = list(table);
+async function get (id, table) {
+    let collection = await list(table);
     return collection.filter(item => item.id === id)[0] || null;
 }
 
-function upsert (table, data) {
+async function upsert (table, data) {
     db[collection].push(data);
     return true;
 }
 
-function remove (id, table) {
+async function remove (id) {
     return true;
 }
 
