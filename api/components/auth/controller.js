@@ -1,9 +1,21 @@
+import auth from '../../../auth/index.js';
 const TABLA = 'auth';
 
 export default (injectedStore) => {
     let store = injectedStore;
     if (!store) {
         store = require('../../../store/dummy');
+    }
+
+    async function login(username, password) {
+        const data = await store.query(TABLA, { username: username });
+
+        if (data.password === password) {
+            // Generar token
+            return auth.sign(data);
+        } else {
+            throw new Error('Info invalid');
+        }
     }
 
     function upsert(data) {
@@ -22,6 +34,7 @@ export default (injectedStore) => {
     }
 
     return {
-        upsert
+        upsert,
+        login
     }
 }

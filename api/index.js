@@ -46,7 +46,9 @@ app.get('/api/v1', (req, res) => res.json({
 
 //Router configuration
 import user from './components/user/network.js';
+import auth from './components/auth/network.js';
 app.use('/api/users', user);
+app.use('/api/auth', auth);
 
 app.listen(config.api.port, () => {
     console.log(`Listening http://localhost:${config.api.port}`);

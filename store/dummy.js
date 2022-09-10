@@ -6,7 +6,7 @@ const db = {
 };
 
 async function list (table) {
-    return await db[table]
+    return await db[table] || [];
 }
 async function get (id, table) {
     let collection = await list(table);
@@ -27,9 +27,18 @@ async function remove (id, collection) {
     return true;
 }
 
+async function query (table, query) {
+    let collection = await list(table);
+    let keys = Object.keys(query);
+    return collection.filter(item => {
+        return keys.every(key => item[key] === query[key]);
+    })[0] || null;
+}
+
 export {
     list,
     get,
     upsert,
     remove,
+    query
 }
