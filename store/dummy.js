@@ -14,8 +14,12 @@ async function get (id, table) {
 }
 
 async function upsert (collection, data) {
+    
+    if (!db[collection]) {
+        db[collection] = [];    
+    }
+    
     db[collection].push(data);
-    return true;
 }
 
 async function remove (id, collection) {
