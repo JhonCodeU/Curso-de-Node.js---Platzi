@@ -1,5 +1,6 @@
 import express from 'express';
 import controller from './index.js';
+import secure from '../auth/secure.js';
 import { success, error } from '../../../network/response.js';
 
 const router = express.Router();
@@ -63,7 +64,7 @@ router.post('/', (req, res) => {
  * @param {User} request.body.required - users info - multipart/form-data
  * @return {object} 200 - User updated
  */
-router.put('/:id', (req, res) => {
+router.put('/:id', secure('update'), (req, res) => {
     controller.updateUser(req.params.id, req.body).then((user) => {
         success(req, res, user, 200);
     }).catch((err) => {

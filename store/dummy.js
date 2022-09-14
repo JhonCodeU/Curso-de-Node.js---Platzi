@@ -27,6 +27,19 @@ async function remove (id, collection) {
     return true;
 }
 
+async function update (TABLE, id, data) {
+    if (!!id) {
+        return await db[TABLE].map(item => {
+            if (item.id === id) {
+                return db[TABLE][id] = {id: id, ...data};
+            }
+            return item;
+        });
+    } else {
+        return 'No se ha encontrado el id';
+    }
+}
+
 async function query (table, query) {
     let collection = await list(table);
     let keys = Object.keys(query);
@@ -40,5 +53,6 @@ export {
     get,
     upsert,
     remove,
-    query
+    query,
+    update
 }

@@ -1,4 +1,4 @@
-import { list, get, upsert, remove } from '../../../store/dummy.js';
+import { list, get, upsert, remove, update } from '../../../store/dummy.js';
 import { nanoid } from 'nanoid';
 import auth from '../auth/index.js';
 const TABLE = 'user';
@@ -35,6 +35,10 @@ export default function (injectedStore) {
         
         return upsert(TABLE, user);
     }
+
+    function updateUser (id, data) {
+        return update(TABLE, id, data);
+    }
     
     function deleteUser (id) {
         return remove(id, TABLE);
@@ -45,5 +49,6 @@ export default function (injectedStore) {
         getUser,
         createUser,
         deleteUser,
+        updateUser
     }
 }
