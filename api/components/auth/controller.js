@@ -5,7 +5,7 @@ const TABLA = 'auth';
 export default (injectedStore) => {
     let store = injectedStore;
     if (!store) {
-        store = require('../../../store/dummy');
+        store = require('../../../store/mysql');
     }
 
     async function login (username, password) {
@@ -15,7 +15,7 @@ export default (injectedStore) => {
             .then(sonIguales => {
                 if (sonIguales === true) {
                     // Generar token
-                    return auth.sign(data);
+                    return auth.sign({ ...data });
                 } else {
                     throw new Error('Información inválida');
                 }

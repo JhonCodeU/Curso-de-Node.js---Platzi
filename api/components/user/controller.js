@@ -1,4 +1,4 @@
-import { list } from '../../../store/mysql.js';
+import { list, get, upsert } from '../../../store/mysql.js';
 //import { list, get, upsert, remove, update } from '../../../store/mysql.js';
 import { nanoid } from 'nanoid';
 import auth from '../auth/index.js';
@@ -16,15 +16,14 @@ export default function (injectedStore) {
     }
 
     function getUser (id) {
-        return get(id, TABLE);
+        return get(TABLE, id);
     }
 
     async function createUser (data) {
         const user = {
             id: data.id || nanoid(),
             name: data.name,
-            username: data.username,
-            password: data.password
+            username: data.username
         };
 
         if (data.password || data.username) {
@@ -38,8 +37,8 @@ export default function (injectedStore) {
         return upsert(TABLE, user);
     }
 
-    function updateUser (id, data) {
-        return update(TABLE, id, data);
+    function updateUser (data) {
+        return update(TABLE, data);
     }
 
     function deleteUser (id) {
