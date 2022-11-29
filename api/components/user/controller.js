@@ -1,4 +1,5 @@
-import { list, get, upsert, remove, update } from '../../../store/dummy.js';
+import { list } from '../../../store/mysql.js';
+//import { list, get, upsert, remove, update } from '../../../store/mysql.js';
 import { nanoid } from 'nanoid';
 import auth from '../auth/index.js';
 const TABLE = 'user';
@@ -9,7 +10,8 @@ export default function (injectedStore) {
         return;
     }
 
-    function listUsers(req, res) {
+    function listUsers (req, res) {
+        console.log('listUsers');
         return list(TABLE)
     }
 
@@ -32,14 +34,14 @@ export default function (injectedStore) {
                 password: data.password
             });
         }
-        
+
         return upsert(TABLE, user);
     }
 
     function updateUser (id, data) {
         return update(TABLE, id, data);
     }
-    
+
     function deleteUser (id) {
         return remove(id, TABLE);
     }

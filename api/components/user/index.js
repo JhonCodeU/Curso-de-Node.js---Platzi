@@ -1,6 +1,6 @@
-import * as store from '../../../store/dummy.js';
+import * as store from '../../../store/mysql.js';
 import controller from './controller.js';
 
-const crtl =  controller(store);
+const crtl = controller(store);
 
 export default crtl;

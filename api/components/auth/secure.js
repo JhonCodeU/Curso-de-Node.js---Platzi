@@ -1,7 +1,7 @@
 import auth from "../../../auth/index.js";
 
 function checkAuth (action) {
-    
+
     function middleware (req, res, next) {
         switch (action) {
             case 'update':

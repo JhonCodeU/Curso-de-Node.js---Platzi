@@ -8,7 +8,7 @@ export default (injectedStore) => {
         store = require('../../../store/dummy');
     }
 
-    async function login(username, password) {
+    async function login (username, password) {
         const data = await store.query(TABLA, { username: username });
 
         return bcrypt.compare(password, data.password)
@@ -22,7 +22,7 @@ export default (injectedStore) => {
             });
     }
 
-    async function upsert(data) {
+    async function upsert (data) {
         const authData = {
             id: data.id,
         }
