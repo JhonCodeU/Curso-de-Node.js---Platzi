@@ -58,5 +58,6 @@ export default function (injectedStore) {
         createUser,
         deleteUser,
         updateUser,
+        follow
     }
 }

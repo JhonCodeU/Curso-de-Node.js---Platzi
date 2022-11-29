@@ -13,17 +13,15 @@ const check = {
     own: function (req, owner) {
         const decoded = decodeHeader(req);
         // Comprobar si es o no propio
+
         if (decoded.id !== owner) {
-            throw new Error('No tienes permiso para hacer esto');
+            throw new Error('No tienes permiso para hacer esto', 401);
         }
     },
 
-    logged: function (req, owner) {
+    logged: function (req) {
         const decoded = decodeHeader(req);
-        // Comprobar si es o no propio
-        if (decoded.id !== owner) {
-            throw new Error('No tienes permiso para hacer esto');
-        }
+        console.log(decoded);
     }
 }
 
