@@ -89,4 +89,20 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+/**
+ * Post /api/follow/{id}
+ * @summary Follow user by id
+ * @tags Users
+ * @param {integer} id.path.required - User id - int64
+ * @return {object} 200 - User followed
+*/
+
+router.post('/follow/:id', secure('follow'), (req, res) => {
+    controller.follow(req.user.id, req.params.id).then((data) => {
+        success(req, res, data, 200);
+    }).catch((err) => {
+        error(req, res, err, 500);
+    });
+});
+
 export default router;

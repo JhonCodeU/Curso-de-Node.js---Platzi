@@ -1,4 +1,4 @@
-import { list, get, upsert } from '../../../store/mysql.js';
+import { list, get, upsert, update, remove } from '../../../store/mysql.js';
 //import { list, get, upsert, remove, update } from '../../../store/mysql.js';
 import { nanoid } from 'nanoid';
 import auth from '../auth/index.js';
@@ -37,12 +37,19 @@ export default function (injectedStore) {
         return upsert(TABLE, user);
     }
 
-    function updateUser (data) {
-        return update(TABLE, data);
+    function updateUser (id, data) {
+        return update(TABLE, { id, ...data });
     }
 
     function deleteUser (id) {
-        return remove(id, TABLE);
+        return remove(TABLE, id);
+    }
+
+    function follow (from, to) {
+        return upsert(TABLE + '_follow', {
+            user_from: from,
+            user_to: to
+        });
     }
 
     return {
@@ -50,6 +57,6 @@ export default function (injectedStore) {
         getUser,
         createUser,
         deleteUser,
-        updateUser
+        updateUser,
     }
 }

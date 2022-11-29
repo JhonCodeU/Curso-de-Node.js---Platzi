@@ -16,6 +16,14 @@ const check = {
         if (decoded.id !== owner) {
             throw new Error('No tienes permiso para hacer esto');
         }
+    },
+
+    logged: function (req, owner) {
+        const decoded = decodeHeader(req);
+        // Comprobar si es o no propio
+        if (decoded.id !== owner) {
+            throw new Error('No tienes permiso para hacer esto');
+        }
     }
 }
 
