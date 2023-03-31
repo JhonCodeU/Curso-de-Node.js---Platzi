@@ -51,5 +51,5 @@ app.use('/api/users', user);
 app.use('/api/auth', auth);
 
 app.listen(config.api.port, () => {
-    console.log(`Listening http://localhost:${config.api.port}`);
+  console.log(`Listening http://localhost:${config.api.port}`);
 });

@@ -94,9 +94,19 @@ async function upsert (table, data) {
 
 // Auth
 
-function query (table, query) {
+function query (table, query, join) {
+
+  let joinQuery = "";
+
+  if (join) {
+    const key = Object.keys(join)[0];
+    const value = join[key];
+    //console.log(key, value.id);
+    joinQuery = `JOIN ${key} ON ${table}.${value} = ${key}.id`;
+  }
+
   return new Promise((resolve, reject) => {
-    connection.query(`SELECT * FROM ${table} WHERE ?`, query, (err, res) => {
+    connection.query(`SELECT * FROM ${table} ${joinQuery} WHERE ${table}.?`, query, (err, res) => {
       if (err) return reject(err);
       resolve(res[0] || null);
     });

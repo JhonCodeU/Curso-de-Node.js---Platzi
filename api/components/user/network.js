@@ -105,4 +105,20 @@ router.post('/follow/:id', secure('follow'), (req, res) => {
     });
 });
 
+/**
+ * GET /api/following/{id}
+ * @summary Follow user by id by
+ * @tags Users
+ * @param {integer} id.path.required -
+ * @return {object} 200 - User followed
+*/
+
+router.get('/following/:id', (req, res) => {
+    controller.following(req.params.id).then((data) => {
+        success(req, res, data, 200);
+    }).catch((err) => {
+        error(req, res, err, 500);
+    });
+});
+
 export default router;

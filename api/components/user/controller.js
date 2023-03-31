@@ -1,4 +1,4 @@
-import { list, get, upsert, update, remove } from '../../../store/mysql.js';
+import { list, get, upsert, update, remove, query } from '../../../store/mysql.js';
 //import { list, get, upsert, remove, update } from '../../../store/mysql.js';
 import { nanoid } from 'nanoid';
 import auth from '../auth/index.js';
@@ -11,7 +11,6 @@ export default function (injectedStore) {
     }
 
     function listUsers (req, res) {
-        console.log('listUsers');
         return list(TABLE)
     }
 
@@ -52,12 +51,22 @@ export default function (injectedStore) {
         });
     }
 
+    async function following (user) {
+        const join = {};
+        join[TABLE] = 'user_to';
+        const queryUser = { user_from: user };
+        console.log(queryUser);
+
+        return await query(TABLE + '_follow', queryUser, join);
+    }
+
     return {
         listUsers,
         getUser,
         createUser,
         deleteUser,
         updateUser,
-        follow
+        follow,
+        following,
     }
 }
