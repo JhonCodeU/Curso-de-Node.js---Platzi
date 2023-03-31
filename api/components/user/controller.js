@@ -4,14 +4,29 @@ import { nanoid } from 'nanoid';
 import auth from '../auth/index.js';
 const TABLE = 'user';
 
-export default function (injectedStore) {
+export default function (injectedStore, injectedCache) {
+    let cache = injectedCache;
     let store = injectedStore;
     if (!store) {
         return;
     }
 
-    function listUsers () {
-        return list(TABLE)
+    if (!cache) {
+        cache = store;
+    }
+
+    async function listUsers () {
+        let users = await cache.list(TABLE);
+
+        if (!users) {
+            console.log('No estaba en caché, buscando en DB');
+            users = await list(TABLE);
+            cache.upsert(TABLE, users);
+        } else {
+            console.log('Datos traidos desde caché');
+        }
+
+        return users;
     }
 
     function getUser (id) {
