@@ -2,6 +2,9 @@ export default {
     api: {
         port: process.env.API_PORT || 8000
     },
+    post: {
+        port: process.env.POST_PORT || 8001
+    },
     jwt: {
         secret: process.env.JWT_SECRET || 'notasecret!'
     },

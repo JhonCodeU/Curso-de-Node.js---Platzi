@@ -7,6 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon api/index.js",
+    "post": "nodemon post/index.js",
     "mysql": "nodemon mysql/index.js"
   },
   "author": "Jhon Arcila Castano",

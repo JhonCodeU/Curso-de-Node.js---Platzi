@@ -1,6 +1,5 @@
 import express from 'express';
 import controller from './index.js';
-import secure from '../auth/secure.js';
 import { success, error } from '../../../network/response.js';
 
 
@@ -57,7 +56,7 @@ function get (req, res) {
  * @return {object} 200 - Post created
  */
 
-router.post('/', secure('create'), upsert);
+router.post('/', upsert);
 
 function upsert (req, res) {
   controller.createPost(req.body).then((post) => {
@@ -95,7 +94,7 @@ function update (req, res) {
  * @return {Error} 404 - Post not found
  */
 
-router.delete('/:id', secure('remove'), remove);
+router.delete('/:id', remove);
 
 function remove (req, res) {
   controller.deletePost(req.params.id).then((post) => {
