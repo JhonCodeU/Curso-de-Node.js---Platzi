@@ -10,7 +10,7 @@ export default function (injectedStore) {
         return;
     }
 
-    function listUsers (req, res) {
+    function listUsers () {
         return list(TABLE)
     }
 
