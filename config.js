@@ -11,4 +11,7 @@ export default {
         password: process.env.MYSQL_PASS || 'password',
         database: process.env.MYSQL_DB || 'nodejsPlatzi'
     },
+    mysqlService: {
+        port: process.env.MYSQL_SRV_PORT || 3001,
+    },
 }
