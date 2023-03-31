@@ -19,4 +19,13 @@ export default {
         host: process.env.MYSQL_SRV_HOST || 'localhost',
         port: process.env.MYSQL_SRV_PORT || 3001,
     },
+    cacheService: {
+        host: process.env.CACHE_SRV_HOST || 'localhost',
+        port: process.env.CACHE_SRV_PORT || 3002,
+    },
+    redis: {
+        host: 'redis-server',
+        port: 6379,
+        password: 'password',
+    }
 }

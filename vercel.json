@@ -2,7 +2,7 @@
   "version": 2,
   "name": "nodejs-microservice",
   "env": {
-    "NODE_ENV": "production",
+    "MODE_ENV": "production",
     "MYSQL_HOST": "@mysql_host",
     "MYSQL_USER": "@mysql_user",
     "MYSQL_PASS": "@mysql_pass",

@@ -1,14 +1,12 @@
 import express from 'express';
 import { success, error } from '../network/response.js';
-import { list, get, upsert, update, remove } from '../store/mysql.js';
+import { list, get, upsert } from '../store/redis.js';
 
 const router = express.Router();
 
 router.get('/:table', listDB);
 router.get('/:table/:id', getDB);
-router.post('/:table', insert);
 router.put('/:table', upsertDB);
-router.delete('/:table/:id', removeDB);
 
 async function listDB (req, res, next) {
   try {
@@ -39,16 +37,7 @@ async function insert (req, res, next) {
 
 async function upsertDB (req, res, next) {
   try {
-    const data = await update(req.body);
-    success(req, res, data, 201);
-  } catch (error) {
-    next(error);
-  }
-}
-
-async function removeDB (req, res, next) {
-  try {
-    const data = await remove(req.params.table, req.params.id);
+    const data = await upsert(req.body);
     success(req, res, data, 201);
   } catch (error) {
     next(error);
