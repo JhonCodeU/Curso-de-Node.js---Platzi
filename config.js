@@ -1,4 +1,5 @@
 export default {
+    remoteDB: process.env.REMOTE_DB || false,
     api: {
         port: process.env.API_PORT || 8000
     },
@@ -9,7 +10,7 @@ export default {
         secret: process.env.JWT_SECRET || 'notasecret!'
     },
     mysql: {
-        host: process.env.MYSQL_HOST || 'localhost',
+        host: process.env.MYSQL_HOST || '',
         user: process.env.MYSQL_USER || 'jhoncode',
         password: process.env.MYSQL_PASS || 'password',
         database: process.env.MYSQL_DB || 'nodejsPlatzi'

@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 import expressJSDocSwagger from 'express-jsdoc-swagger'
 
 const options = {
+  swagger: "2.0",
   info: {
     version: '1.0.0',
     title: 'Social Network API Documentation',
@@ -36,13 +37,13 @@ const options = {
 expressJSDocSwagger(app)(options);
 
 /**
- * GET /api/v1
- * @summary This is the summary of the endpoint
+ * GET /
+ * @summary This is the redirect /api-docs to /
  * @return {object} 200 - success response
  */
-app.get('/api/v1', (req, res) => res.json({
-  success: true,
-}));
+app.get('/', (req, res) => {
+  res.redirect('/api-docs');
+});
 
 //Router configuration
 import user from './components/user/network.js';
